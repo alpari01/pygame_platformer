@@ -193,17 +193,20 @@ while running:
     for sprite in sprites_obstacles:
         screen.blit(sprite.surf, sprite.rect)
 
-
     # Scroll screen while player is moving.
     if player.rect.right >= WIDTH / 2:
-        player.pos.x -= abs(player.vel.x)
+        # If player's position is far right from middle of the screen.
+        player.pos.x -= abs(player.vel.x)  # Update player's position (remove negative value, use abs for this).
+        # Update obstacles' positions.
         for obstacle in sprites_obstacles:
             obstacle.rect.x -= abs(player.vel.x)
     if player.rect.left < WIDTH / 2:
+        # If player's position is far left from middle of the screen.
         player.pos.x += abs(player.vel.x)
         for obstacle in sprites_obstacles:
             obstacle.rect.x += abs(player.vel.x)
 
+    # DO NOT remove these :)
     player.move()
     player.update()
     clock.tick(FPS)  # Maintain the constant FPS.
