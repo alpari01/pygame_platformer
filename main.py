@@ -35,8 +35,8 @@ color_dark_gray = (100, 100, 100)
 color_light_gray = (170, 170, 170)
 
 # Fonts used
-font_main_menu = pygame.font.SysFont('Corbel', 35)
-
+pygame.font.init()  # Calling font module.
+font_player_message = pygame.font.SysFont('Comic Sans MS', 30)
 
 # Classes. Every class in pygame mush have 'image' and 'rect' settings.
 class Player(pygame.sprite.Sprite):
@@ -90,6 +90,11 @@ class Player(pygame.sprite.Sprite):
             if hits:
                 self.pos.y = hits[0].rect.top + 1
                 self.vel.y = 0
+
+    def message(self, text: str):
+        """Handle player messages (aka player's thoughts)."""
+        text_player = font_player_message.render(text, False, (0, 0, 0))  # Crete text object.
+        screen.blit(text_player, (self.rect.x - (len(text) * 10 // 2), self.rect.y -50))  # Show text on the screen.
 
 
 class Platform(pygame.sprite.Sprite):
@@ -188,6 +193,7 @@ while running:
 
     # Update objects on the screen.
     draw_background(1)
+    player.message("Bro what")
     for sprite in sprites_player:
         screen.blit(sprite.surf, sprite.rect)
     for sprite in sprites_obstacles:
