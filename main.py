@@ -8,7 +8,8 @@ game_folder = os.path.dirname(__file__)
 
 img_folder = os.path.join(game_folder, 'images')
 player_img = pygame.image.load(os.path.join(img_folder, 'player_test.jpg'))
-background_img = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))  # CHANGE LATER
+img_background_menu = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))  # CHANGE LATER
+img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg_test.jpg'))  # CHANGE LATER
 
 # Game main window's dimensions (in pixels).
 WIDTH = 1200
@@ -17,7 +18,7 @@ HEIGHT = 700
 FPS = 60  # Game frames per second.
 
 # Movement parameters.
-ACC = 0.5  # Linear speed while moving.
+ACC = 5  # Linear speed while moving.
 FRIC = -0.12  # Friction. While running player won't stop immediately (add some slide effect).
 vec = pygame.math.Vector2  # Constant 2 vector to handle movement in both directions (horizontally and vertically).
 
@@ -64,25 +65,27 @@ class Player(pygame.sprite.Sprite):
         keystate = pygame.key.get_pressed()  # Get dict with all buttons available in pygame.
         if keystate[pygame.K_LEFT]:
             # If 'LeftArrow' is pressed, player move left.
-            self.acc.x = -ACC
+            self.vel.x = -ACC
         if keystate[pygame.K_RIGHT]:
             # If 'RightArrow' is pressed, player move right.
-            self.acc.x = ACC
+            self.vel.x = ACC
 
-        self.acc.x += self.vel.x * FRIC
+        if not keystate[pygame.K_RIGHT] and not keystate[pygame.K_LEFT]:
+            self.vel.x = 0
+
         self.vel += self.acc
-        self.pos += self.vel + 0.5 * self.acc
+        self.pos += self.vel
 
         self.rect.midbottom = self.pos
 
     def jump(self):
-        hits = pygame.sprite.spritecollide(self, sprites_platforms, False)  # Do not jump while already jumping (avoid double-jump).
+        hits = pygame.sprite.spritecollide(self, sprites_obstacles, False)  # Do not jump while already jumping (avoid double-jump).
         if hits:
             self.vel.y = -15  # Assign the negative value since the jump goes up, not down.
 
     def update(self):
         """Handle hits (collisions) with other game objects (sprites)."""
-        hits = pygame.sprite.spritecollide(player, sprites_platforms, False)  # False - do not delete sprite after collision.
+        hits = pygame.sprite.spritecollide(player, sprites_obstacles, False)  # False - do not delete sprite after collision.
         if player.vel.y > 0:
             if hits:
                 self.pos.y = hits[0].rect.top + 1
@@ -90,30 +93,62 @@ class Player(pygame.sprite.Sprite):
 
 
 class Platform(pygame.sprite.Sprite):
+    """Ground. Player cannot go beyond the world's absolute ground."""
     def __init__(self):
         super().__init__()
-        self.surf = pygame.Surface((WIDTH, 20))
+        self.surf = pygame.Surface((WIDTH, 5))
         self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect(center=(WIDTH / 2, HEIGHT - 10))
 
     def move(self):
         pass
 
+
+class Obstacle(pygame.sprite.Sprite):
+    """
+    Obstacle class.
+
+    Can be 1x1 square, 1x0.5 square, triangle, rectangle of fixed types.
+    Rectangle fixed types: 1x2, 2x2, 2x4, 4x4 ???
+    """
+    def __init__(self, width, height, pos_x, pos_y):
+        super().__init__()
+        self.surf = pygame.Surface((width, height))
+        self.rect = self.surf.get_rect()
+        self.surf.fill((0, 150, 0))
+
+        self.pos = vec((pos_x, pos_y))
+        self.rect.midbottom = self.pos
+
+
 # Sprites
 sprites_player = pygame.sprite.Group()  # Create group of sprites.
-sprites_platforms = pygame.sprite.Group()  # Create another group of sprites.
+sprites_obstacles = pygame.sprite.Group()  # Create another group of sprites.
 
 player = Player()  # Create player object.
-platform = Platform()  # Create platform object.
+platform_world_ground = Platform()  # Create platform object.
+obstacle2 = Obstacle(100, 100, 800, 700)
+obstacle1 = Obstacle(100, 50, 500, 500)
+
 
 sprites_player.add(player)  # Add new 'player' object (instance of 'Player' class) to sprites group.
 
-sprites_platforms.add(platform)
+sprites_obstacles.add(platform_world_ground)
+sprites_obstacles.add(obstacle2)
+sprites_obstacles.add(obstacle1)
 
 
-def draw_background():
-    # Draw background while main menu is displayed.
-    screen.blit(background_img, (0, 0))
+def draw_background(level: int = 0):
+    """
+    Draw background image according to the current level.
+
+    :param level: current level. This variable sets which type of image to render at background.
+    :return: None
+    """
+    screen.blit(img_background_menu, (0, 0)) # Menu
+    if level == 1:
+        # First (intro) level.
+        screen.blit(img_background_first_level, (0, 0))
 
 
 def menu_close():
@@ -124,6 +159,7 @@ def menu_close():
 def menu_show():
     """Show the main menu at start."""
     menu.mainloop(screen, bgfun=draw_background)
+
 
 # Menu
 menu_theme = pygame_menu.themes.Theme()  # Main menu object.
@@ -138,29 +174,41 @@ menu_show()
 # Main loop.
 running = True  # True - game is running, False - quit (end) the game.
 while running:
-
     # Handel keyboard actions.
     for event in pygame.event.get():
         # Handle pressing "X (close window)" in the window's upper panel.
         if event.type == pygame.QUIT:
             # Stop the game => Exit.
             running = False
+        # Handle 'jumping' action.
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
                 # Jump by pressing 'Spacebar' or 'UpArrow'
                 player.jump()
 
-    screen.fill((120, 120, 120))
-    player.move()
-    player.update()
-
     # Update objects on the screen.
+    draw_background(1)
     for sprite in sprites_player:
         screen.blit(sprite.surf, sprite.rect)
-    for sprite in sprites_platforms:
+    for sprite in sprites_obstacles:
         screen.blit(sprite.surf, sprite.rect)
 
+    # Scroll screen while player is moving.
+    if player.rect.right >= WIDTH / 2:
+        # If player's position is far right from middle of the screen.
+        player.pos.x -= abs(player.vel.x)  # Update player's position (remove negative value, use abs for this).
+        # Update obstacles' positions.
+        for obstacle in sprites_obstacles:
+            obstacle.rect.x -= abs(player.vel.x)
+    if player.rect.left < WIDTH / 2:
+        # If player's position is far left from middle of the screen.
+        player.pos.x += abs(player.vel.x)
+        for obstacle in sprites_obstacles:
+            obstacle.rect.x += abs(player.vel.x)
 
+    # DO NOT remove these :)
+    player.move()
+    player.update()
     clock.tick(FPS)  # Maintain the constant FPS.
     pygame.display.flip()  # Update screen.
 
