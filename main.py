@@ -83,6 +83,9 @@ class Player(pygame.sprite.Sprite):
         self.vel = vec(0, 0)
 
         self.image_index = 0
+        self.millis = pygame.time.get_ticks()  # Get time in milliseconds since pygame.init.
+        self.image_change_delay = 1  # Set how quickly animation poses change (in seconds).
+        self.timing = 0  # For delay loop to work.
         self.idle_direction = 'right'  # 'Left' - player watches left side while stops, 'Right' - player watches right.
 
     def move(self):
@@ -103,11 +106,12 @@ class Player(pygame.sprite.Sprite):
             # If player is moving left and touching other objects (e.g. ground).
             if pygame.sprite.spritecollide(self, sprites_obstacles, False):
                 # Change animation to running.
-                self.image = pygame.transform.scale(anim_running[self.image_index], (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+                self.image = pygame.transform.scale(anim_running[int(self.image_index)], (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
                 self.image = pygame.transform.flip(self.image, True, False)
-                self.image_index += 1
-                if self.image_index + 1 == len(anim_running):
+                self.image_index += 0.3
+                if self.image_index >= len(anim_running):
                     self.image_index = 0
+
                 self.idle_direction = 'left'
 
         if keystate[pygame.K_RIGHT]:
@@ -118,12 +122,14 @@ class Player(pygame.sprite.Sprite):
             if not pygame.sprite.spritecollide(self, sprites_obstacles, False):
                 self.image = pygame.transform.scale(img_player_jumping, (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
 
+            # If player is moving right and touching other objects (e.g. ground).
             if pygame.sprite.spritecollide(self, sprites_obstacles, False):
                 # Change animation to running (do loop through running poses).
-                self.image = pygame.transform.scale(anim_running[self.image_index], (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
-                self.image_index += 1
-                if self.image_index + 1 == len(anim_running):
+                self.image = pygame.transform.scale(anim_running[int(self.image_index)], (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+                self.image_index += 0.3
+                if self.image_index >= len(anim_running):
                     self.image_index = 0
+
                 self.idle_direction = 'right'
 
         if not keystate[pygame.K_RIGHT] and not keystate[pygame.K_LEFT]:
