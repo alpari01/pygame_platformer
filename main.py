@@ -1,15 +1,11 @@
 import pygame
 import pygame_menu
 import os
+import threading
 import random
 
-# Game assets settings
-game_folder = os.path.dirname(__file__)
 
-img_folder = os.path.join(game_folder, 'images')
-player_img = pygame.image.load(os.path.join(img_folder, 'player_test.jpg'))
-img_background_menu = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))  # CHANGE LATER
-img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg_test.jpg'))  # CHANGE LATER
+pygame.init()  # Initialize game constructor.
 
 # Game main window's dimensions (in pixels).
 WIDTH = 1200
@@ -17,17 +13,51 @@ HEIGHT = 700
 
 FPS = 60  # Game frames per second.
 
+screen = pygame.display.set_mode((WIDTH, HEIGHT))  # Set up the main window.
+pygame.display.set_caption("My test")  # Set the name of the game window.
+
+clock = pygame.time.Clock()
+
+
+# Game assets settings
+game_folder = os.path.dirname(__file__)
+
+img_folder = os.path.join(game_folder, 'images')  # All textures go here.
+
+# Player action images.
+img_player_running_0 = pygame.image.load(os.path.join(img_folder, 'running_0.png'))
+img_player_running_1 = pygame.image.load(os.path.join(img_folder, 'running_1.png'))
+img_player_running_2 = pygame.image.load(os.path.join(img_folder, 'running_2.png'))
+img_player_running_3 = pygame.image.load(os.path.join(img_folder, 'running_3.png'))
+img_player_running_4 = pygame.image.load(os.path.join(img_folder, 'running_4.png'))
+img_player_running_5 = pygame.image.load(os.path.join(img_folder, 'running_5.png'))
+img_player_running_6 = pygame.image.load(os.path.join(img_folder, 'running_6.png'))
+img_player_running_7 = pygame.image.load(os.path.join(img_folder, 'running_7.png'))
+
+img_player_jumping = pygame.image.load(os.path.join(img_folder, 'jumping.png'))
+
+
+anim_running = [img_player_running_0, img_player_running_1, img_player_running_2,
+                img_player_running_3, img_player_running_4, img_player_running_5,
+                img_player_running_6, img_player_running_7]
+
+# Player idle images
+img_player_idle_0 = pygame.image.load(os.path.join(img_folder, 'idle_0.png'))
+
+# Background images.
+img_background_menu = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg')).convert()  # CHANGE LATER
+img_background_menu_rect = img_background_menu.get_rect()
+
+img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg_test.jpg')).convert()  # CHANGE LATER
+img_background_first_level_rect = img_background_first_level.get_rect()
+
+IMAGE_ADD_SCALE = 32  # Increase scale of images by this value.
+
 # Movement parameters.
 ACC = 5  # Linear speed while moving.
 FRIC = -0.12  # Friction. While running player won't stop immediately (add some slide effect).
 vec = pygame.math.Vector2  # Constant 2 vector to handle movement in both directions (horizontally and vertically).
 
-pygame.init()  # Initialize game constructor.
-
-screen = pygame.display.set_mode((WIDTH, HEIGHT))  # Set up the main window.
-pygame.display.set_caption("My test")  # Set the name of the game window.
-
-clock = pygame.time.Clock()
 
 
 # Colors used
@@ -45,17 +75,15 @@ class Player(pygame.sprite.Sprite):
         """Init."""
         super().__init__()  # Run built-in class 'Sprite' initializer.
 
-        # Test image
-        #self.image = player_img
-        #self.image.set_colorkey((255, 255, 255))  # Ignore white color (works bad).
-
-        self.surf = pygame.Surface((50, 50))
-        self.surf.fill((0, 0, 0))
-        self.rect = self.surf.get_rect()  # Set object border (aka collision). Border is calculated based on image.
+        self.image = pygame.transform.scale(img_player_idle_0, (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+        self.rect = self.image.get_rect()
 
         self.pos = vec((WIDTH / 2, HEIGHT / 2))
         self.acc = vec(0, 0)
         self.vel = vec(0, 0)
+
+        self.image_index = 0
+        self.idle_direction = 'right'  # 'Left' - player watches left side while stops, 'Right' - player watches right.
 
     def move(self):
         """Player movement."""
@@ -66,12 +94,48 @@ class Player(pygame.sprite.Sprite):
         if keystate[pygame.K_LEFT]:
             # If 'LeftArrow' is pressed, player move left.
             self.vel.x = -ACC
+
+            # If player is in the air (does not touch other objects), then show jumping pose.
+            if not pygame.sprite.spritecollide(self, sprites_obstacles, False):
+                self.image = pygame.transform.scale(img_player_jumping, (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+                self.image = pygame.transform.flip(self.image, True, False)
+
+            # If player is moving left and touching other objects (e.g. ground).
+            if pygame.sprite.spritecollide(self, sprites_obstacles, False):
+                # Change animation to running.
+                self.image = pygame.transform.scale(anim_running[self.image_index], (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+                self.image = pygame.transform.flip(self.image, True, False)
+                self.image_index += 1
+                if self.image_index + 1 == len(anim_running):
+                    self.image_index = 0
+                self.idle_direction = 'left'
+
         if keystate[pygame.K_RIGHT]:
             # If 'RightArrow' is pressed, player move right.
             self.vel.x = ACC
 
+            # If player is in the air (does not touch other objects), then show jumping pose.
+            if not pygame.sprite.spritecollide(self, sprites_obstacles, False):
+                self.image = pygame.transform.scale(img_player_jumping, (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+
+            if pygame.sprite.spritecollide(self, sprites_obstacles, False):
+                # Change animation to running (do loop through running poses).
+                self.image = pygame.transform.scale(anim_running[self.image_index], (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+                self.image_index += 1
+                if self.image_index + 1 == len(anim_running):
+                    self.image_index = 0
+                self.idle_direction = 'right'
+
         if not keystate[pygame.K_RIGHT] and not keystate[pygame.K_LEFT]:
+            # If moving buttons are not pressed => player stop, show idle animation.
             self.vel.x = 0
+
+            if self.idle_direction == 'left':
+                self.image = pygame.transform.scale(img_player_idle_0, (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+                self.image = pygame.transform.flip(self.image, True, False)
+
+            if self.idle_direction == 'right':
+                self.image = pygame.transform.scale(img_player_idle_0, (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
 
         self.vel += self.acc
         self.pos += self.vel
@@ -79,7 +143,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.midbottom = self.pos
 
     def jump(self):
-        hits = pygame.sprite.spritecollide(self, sprites_obstacles, False)  # Do not jump while already jumping (avoid double-jump).
+        hits = pygame.sprite.spritecollide(self, sprites_obstacles, False)  # Handle player sprite collision with other sprites (e.g. obstacle sprites).
+        # Do not jump while already jumping (avoid double-jump).
         if hits:
             self.vel.y = -15  # Assign the negative value since the jump goes up, not down.
 
@@ -157,10 +222,10 @@ def draw_background(level: int = 0):
     :param level: current level. This variable sets which type of image to render at background.
     :return: None
     """
-    screen.blit(img_background_menu, (0, 0)) # Menu
+    screen.blit(img_background_menu, img_background_menu_rect) # Menu
     if level == 1:
         # First (intro) level.
-        screen.blit(img_background_first_level, (0, 0))
+        screen.blit(img_background_first_level, img_background_first_level_rect)
 
 
 def menu_close():
@@ -201,7 +266,7 @@ while running:
     # Update objects on the screen.
     draw_background(1)
     for sprite in sprites_player:
-        screen.blit(sprite.surf, sprite.rect)
+        screen.blit(sprite.image, sprite.rect)
     for sprite in sprites_obstacles:
         screen.blit(sprite.surf, sprite.rect)
 
