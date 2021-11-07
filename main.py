@@ -64,7 +64,8 @@ color_dark_gray = (100, 100, 100)
 color_light_gray = (170, 170, 170)
 
 # Fonts used
-font_main_menu = pygame.font.SysFont('Corbel', 35)
+pygame.font.init()  # Calling font module.
+font_player_message = pygame.font.SysFont('Comic Sans MS', 30)
 
 
 # Classes. Every class in pygame mush have 'image' and 'rect' settings.
@@ -146,6 +147,11 @@ class Player(pygame.sprite.Sprite):
         # Do not jump while already jumping (avoid double-jump).
         if hits:
             self.vel.y = -15  # Assign the negative value since the jump goes up, not down.
+
+    def message(self, text: str):
+        """Handle player messages (aka player's thoughts)."""
+        text_player = font_player_message.render(text, False, (0, 0, 0))  # Crete text object.
+        screen.blit(text_player, (self.rect.x - (len(text) * 10 // 2), self.rect.y - 50))  # Show text on the screen.
 
     def update(self):
         """Handle hits (collisions) with other game objects (sprites)."""
@@ -249,9 +255,11 @@ while running:
             if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
                 # Jump by pressing 'Spacebar' or 'UpArrow'
                 player.jump()
-
     # Update objects on the screen.
     draw_background(1)
+
+    player.message("Hello, world!")  # TEST, remove later
+
     for sprite in sprites_player:
         screen.blit(sprite.image, sprite.rect)
     for sprite in sprites_obstacles:
