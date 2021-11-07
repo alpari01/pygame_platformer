@@ -4,7 +4,6 @@ import os
 import threading
 import random
 
-
 pygame.init()  # Initialize game constructor.
 
 # Game main window's dimensions (in pixels).
