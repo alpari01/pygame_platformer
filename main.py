@@ -1,7 +1,7 @@
 import pygame
 import pygame_menu
 import os
-import random
+
 
 # Game assets settings
 game_folder = os.path.dirname(__file__)

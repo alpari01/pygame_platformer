@@ -1,7 +1,7 @@
 import pygame
 from support import import_csv_layout, import_cut_graphics
 from settings import tile_size, screen_height, screen_width
-from tiles import Tile, StaticTile, Coin, Palm
+from tiles import StaticTile
 
 
 class Level:
@@ -18,7 +18,7 @@ class Level:
 
         for row_index, row in enumerate(layout):
             for col_index, val in enumerate(row):
-                print(val)
+                # print(val)
                 if val != '-1':
                     x = col_index * tile_size
                     y = row_index * tile_size
