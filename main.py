@@ -4,12 +4,13 @@ import os
 import random
 
 # Game assets settings
+
 game_folder = os.path.dirname(__file__)
 
 img_folder = os.path.join(game_folder, 'images')
 player_img = pygame.image.load(os.path.join(img_folder, 'player_test.jpg'))
 img_background_menu = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))  # CHANGE LATER
-img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg_test.jpg'))  # CHANGE LATER
+img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_background.png'))  # CHANGE LATER
 
 # Game main window's dimensions (in pixels).
 WIDTH = 1200
@@ -45,6 +46,7 @@ class Player(pygame.sprite.Sprite):
         """Init."""
         super().__init__()  # Run built-in class 'Sprite' initializer.
 
+        self.image = pygame.image.load(os.path.join(img_folder, 'player_test.jpg'))
         # Test image
         #self.image = player_img
         #self.image.set_colorkey((255, 255, 255))  # Ignore white color (works bad).
@@ -116,7 +118,7 @@ class Obstacle(pygame.sprite.Sprite):
     Can be 1x1 square, 1x0.5 square, triangle, rectangle of fixed types.
     Rectangle fixed types: 1x2, 2x2, 2x4, 4x4 ???
     """
-    def __init__(self, width, height, pos_x, pos_y):
+    def __init__(self, width, height, pos_x, pos_y, move_x, move_y):
         super().__init__()
         self.surf = pygame.Surface((width, height))
         self.rect = self.surf.get_rect()
@@ -124,6 +126,18 @@ class Obstacle(pygame.sprite.Sprite):
 
         self.pos = vec((pos_x, pos_y))
         self.rect.midbottom = self.pos
+        self.move_counter = 0
+        self.move_direction = 1
+        self.move_x = move_x  # if move_x value is not 0, the obstacle moves right and left
+        self.move_y = move_y  # if move_y value is not 0, the obstacle moves up and down
+
+    def update(self):
+        self.rect.x += self.move_direction * self.move_x  # move_direction is now manipulated by move_x
+        self.rect.y += self.move_direction * self.move_y
+        self.move_counter += 1
+        if abs(self.move_counter) > 50:
+            self.move_direction *= -1
+            self.move_counter *= -1
 
 
 # Sprites
@@ -132,8 +146,8 @@ sprites_obstacles = pygame.sprite.Group()  # Create another group of sprites.
 
 player = Player()  # Create player object.
 platform_world_ground = Platform()  # Create platform object.
-obstacle2 = Obstacle(100, 100, 800, 700)
-obstacle1 = Obstacle(100, 50, 500, 500)
+obstacle2 = Obstacle(100, 100, 800, 700, 1, 0)
+obstacle1 = Obstacle(100, 50, 500, 500, 0, 1)
 
 
 sprites_player.add(player)  # Add new 'player' object (instance of 'Player' class) to sprites group.
@@ -213,6 +227,8 @@ while running:
             obstacle.rect.x += abs(player.vel.x)
 
     # DO NOT remove these :)
+    obstacle1.update()
+    obstacle2.update()
     player.move()
     player.update()
     clock.tick(FPS)  # Maintain the constant FPS.
