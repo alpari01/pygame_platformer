@@ -8,15 +8,15 @@ level_layout_intro = [
     '   B                        B                ',
     '   B              B         B                ',
     '   B                     BBBB                ',
-    '   B              P        B                ',
+    '   B              P        B                 ',
     '   B    B            B     B                 ',
     '   B                                         ',
     '   B            B    B                       ',
     '   B                 B                       ',
-    '                     B       B               ',
-    'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
+    '                     B       B NNN           ',
+    'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBBBBBBBBB'
 ]
-
+# Blocks types: B - stone block, N - stone mossy block1, M - stone mossy block2.
 block_size = 48  # Size of a single block.
 
 # Game main window's dimensions (in pixels).
@@ -46,7 +46,7 @@ anim_running = [img_player_running_0, img_player_running_1, img_player_running_2
                 img_player_running_3, img_player_running_4, img_player_running_5,
                 img_player_running_6, img_player_running_7]
 
-# Player idle images
+# Player idle images.
 img_player_idle_0 = pygame.image.load(os.path.join(img_folder, 'idle_0.png'))
 
 # Background images.
@@ -56,9 +56,14 @@ img_background_menu_rect = img_background_menu.get_rect()
 img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg_test.jpg'))  # CHANGE LATER
 img_background_first_level_rect = img_background_first_level.get_rect()
 
-IMAGE_ADD_SCALE = 28  # Increase scale of images by this value.
+IMAGE_ADD_SCALE = 28  # Increase player scale of images by this value.
 
-# Fonts used
+# Blocks textures.
+img_block_wall_stones = pygame.image.load(os.path.join(img_folder, 'wall_stones.png'))
+img_block_wall_stones_mossy1 = pygame.image.load(os.path.join(img_folder, 'wall_stones_mossy1.png'))
+img_block_wall_stones_mossy2 = pygame.image.load(os.path.join(img_folder, 'wall_stones_mossy2.png'))
+
+# Fonts used.
 pygame.font.init()  # Calling font module.
 font_player_message = pygame.font.SysFont('Comic Sans MS', 30)
 

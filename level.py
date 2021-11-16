@@ -23,7 +23,18 @@ class Level:
                 y = row_index * block_size
 
                 if block_type == 'B':
+                    # Add stone block
                     block = Block((x, y), block_size)
+                    self.sprites_blocks.add(block)
+
+                if block_type == 'N':
+                    # Add mossy stone block1
+                    block = Block((x, y), block_size, texture='wall_stone_moss1')
+                    self.sprites_blocks.add(block)
+
+                if block_type == 'M':
+                    # Add mossy stone block2
+                    block = Block((x, y), block_size, texture='wall_stone_moss2')
                     self.sprites_blocks.add(block)
 
                 if block_type == 'P':
