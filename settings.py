@@ -8,12 +8,12 @@ level_layout_intro = [
     '   B                        B                ',
     '   B              B         B                ',
     '   B                     BBBB                ',
-    '   B    P                   B                ',
+    '   B              P        B                ',
     '   B    B            B     B                 ',
-    '    B                                        ',
-    '   B            B                            ',
     '   B                                         ',
-    '   B                         B               ',
+    '   B            B    B                       ',
+    '   B                 B                       ',
+    '                     B       B               ',
     'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
 ]
 

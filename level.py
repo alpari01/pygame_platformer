@@ -37,11 +37,11 @@ class Level:
         direction_x = player.direction.x
 
         # Scroll world right if player moving left.
-        if player_x < WIDTH / 2 - 100 and direction_x < 0 and player.get_input() == 'move_left':
+        if player_x < WIDTH / 2 and direction_x < 0 and player.get_input() == 'move_left':
             self.world_shift_horizontal = 5
             player.moving_speed = 0
         # Scroll world left if player moving right.
-        elif player_x >= WIDTH / 2 + 100 and direction_x > 0 and player.get_input() == 'move_right':
+        elif player_x > WIDTH / 2 and direction_x > 0 and player.get_input() == 'move_right':
             self.world_shift_horizontal = -5
             player.moving_speed = 0
 
@@ -85,7 +85,7 @@ class Level:
                     player.rect.top = block.rect.bottom
                     player.direction.y = 0  # If player hits something with its head => cancel jumping (avoid sliding while jumping and hitting e.g. ceiling).
 
-        player.message("Hello, world!")  # TEST, remove later
+        player.message(str(player.rect.width))  # TEST, remove later
 
     def run(self):
         """Run (i.e. draw i.e. render) the level."""
