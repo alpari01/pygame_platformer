@@ -4,13 +4,12 @@ import os
 import random
 
 # Game assets settings
-
 game_folder = os.path.dirname(__file__)
 
 img_folder = os.path.join(game_folder, 'images')
 player_img = pygame.image.load(os.path.join(img_folder, 'player_test.jpg'))
 img_background_menu = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))  # CHANGE LATER
-img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_background.png'))  # CHANGE LATER
+img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg_test.jpg'))  # CHANGE LATER
 
 # Game main window's dimensions (in pixels).
 WIDTH = 1200
@@ -36,8 +35,8 @@ color_dark_gray = (100, 100, 100)
 color_light_gray = (170, 170, 170)
 
 # Fonts used
-pygame.font.init()  # Calling font module.
-font_player_message = pygame.font.SysFont('Comic Sans MS', 30)
+font_main_menu = pygame.font.SysFont('Corbel', 35)
+
 
 # Classes. Every class in pygame mush have 'image' and 'rect' settings.
 class Player(pygame.sprite.Sprite):
@@ -46,7 +45,6 @@ class Player(pygame.sprite.Sprite):
         """Init."""
         super().__init__()  # Run built-in class 'Sprite' initializer.
 
-        self.image = pygame.image.load(os.path.join(img_folder, 'player_test.jpg'))
         # Test image
         #self.image = player_img
         #self.image.set_colorkey((255, 255, 255))  # Ignore white color (works bad).
@@ -92,11 +90,6 @@ class Player(pygame.sprite.Sprite):
             if hits:
                 self.pos.y = hits[0].rect.top + 1
                 self.vel.y = 0
-
-    def message(self, text: str):
-        """Handle player messages (aka player's thoughts)."""
-        text_player = font_player_message.render(text, False, (0, 0, 0))  # Crete text object.
-        screen.blit(text_player, (self.rect.x - (len(text) * 10 // 2), self.rect.y -50))  # Show text on the screen.
 
 
 class Platform(pygame.sprite.Sprite):
@@ -207,7 +200,6 @@ while running:
 
     # Update objects on the screen.
     draw_background(1)
-    player.message("Bro what")
     for sprite in sprites_player:
         screen.blit(sprite.surf, sprite.rect)
     for sprite in sprites_obstacles:
