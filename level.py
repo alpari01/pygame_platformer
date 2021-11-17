@@ -1,5 +1,5 @@
 import pygame
-from blocks import Block
+from blocks import *
 from settings import *
 from player import Player
 
@@ -23,22 +23,27 @@ class Level:
                 y = row_index * block_size
 
                 if block_type == 'B':
-                    # Add stone block
+                    # Add stone block.
                     block = Block((x, y), block_size)
                     self.sprites_blocks.add(block)
 
                 if block_type == 'N':
-                    # Add mossy stone block1
+                    # Add mossy stone block1.
                     block = Block((x, y), block_size, texture='wall_stone_moss1')
                     self.sprites_blocks.add(block)
 
                 if block_type == 'M':
-                    # Add mossy stone block2
+                    # Add mossy stone block2.
                     block = Block((x, y), block_size, texture='wall_stone_moss2')
                     self.sprites_blocks.add(block)
 
+                if block_type == 'D':
+                    # Add door.
+                    door = IterObject((x, y), block_size, texture='door_metal_is_closed')
+                    self.sprites_blocks.add(door)
+
                 if block_type == 'P':
-                    player = Player((x, y))
+                    player = Player((x, y), (block_size, block_size))
                     self.sprites_player.add(player)
 
     def scroll_x(self):
