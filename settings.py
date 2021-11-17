@@ -10,13 +10,14 @@ level_layout_intro = [
     '   B                     BBBB                ',
     '   B              P        B                 ',
     '   B    B            B     B                 ',
-    '   B                                         ',
-    '   B            B    B                       ',
-    '   B                 B                       ',
-    '                     B       B NNN           ',
+    '   B                                     M   ',
+    '   B            B    B                   M   ',
+    '   B                 B                   B   ',
+    '                     B       B NNN       D   ',
     'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBBBBBBBBB'
 ]
 # Blocks types: B - stone block, N - stone mossy block1, M - stone mossy block2.
+# Iter objects: D - door.
 block_size = 48  # Size of a single block.
 
 # Game main window's dimensions (in pixels).
@@ -63,8 +64,13 @@ img_block_wall_stones = pygame.image.load(os.path.join(img_folder, 'wall_stones.
 img_block_wall_stones_mossy1 = pygame.image.load(os.path.join(img_folder, 'wall_stones_mossy1.png'))
 img_block_wall_stones_mossy2 = pygame.image.load(os.path.join(img_folder, 'wall_stones_mossy2.png'))
 
+"""Interactable objects."""
+# Doors
+img_door_metal_closed = pygame.image.load(os.path.join(img_folder, 'img_door_metal_closed.png'))
+img_door_metal_opened = pygame.image.load(os.path.join(img_folder, 'img_door_metal_opened.png'))
+
 # Fonts used.
 pygame.font.init()  # Calling font module.
-font_player_message = pygame.font.SysFont('Comic Sans MS', 30)
+font_message = pygame.font.SysFont('Comic Sans MS', 30)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))  # Set up the main window.

@@ -3,10 +3,10 @@ from settings import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos):
+    def __init__(self, pos, size):
         """Player init."""
         super().__init__()
-        self.image = pygame.transform.scale(img_player_idle_0, (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+        self.image = pygame.transform.scale(img_player_idle_0,  (block_size, block_size))
         self.rect = self.image.get_rect(topleft=pos)
 
         # Movement
@@ -28,8 +28,7 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = self.moving_speed
 
             # Change animation to running (do loop through running poses).
-            self.image = pygame.transform.scale(anim_running[int(self.image_index)],
-                                                (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+            self.image = pygame.transform.scale(anim_running[int(self.image_index)], (block_size, block_size))
             self.image_index += 0.1  # Animation frames changing speed.
             if self.image_index >= len(anim_running):
                 self.image_index = 0
@@ -42,8 +41,7 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = -self.moving_speed
 
             # Change animation to running left (do loop through running poses)..
-            self.image = pygame.transform.scale(anim_running[int(self.image_index)],
-                                                (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+            self.image = pygame.transform.scale(anim_running[int(self.image_index)], (block_size, block_size))
             self.image = pygame.transform.flip(self.image, True, False)
             self.image_index += 0.1  # Animation frames changing speed.
             if self.image_index >= len(anim_running):
@@ -64,11 +62,11 @@ class Player(pygame.sprite.Sprite):
 
             # Show idle pose.
             if self.idle_direction == 'left':
-                self.image = pygame.transform.scale(img_player_idle_0, (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+                self.image = pygame.transform.scale(img_player_idle_0, (block_size, block_size))
                 self.image = pygame.transform.flip(self.image, True, False)
 
             if self.idle_direction == 'right':
-                self.image = pygame.transform.scale(img_player_idle_0, (19 + IMAGE_ADD_SCALE, 20 + IMAGE_ADD_SCALE))
+                self.image = pygame.transform.scale(img_player_idle_0, (block_size, block_size))
 
     def jump(self):
         """Handle jumping."""
@@ -79,9 +77,8 @@ class Player(pygame.sprite.Sprite):
 
     def message(self, text: str):
         """Handle player messages (aka player's thoughts)."""
-        text_player = font_player_message.render(text, False, (0, 0, 0))  # Crete text object.
+        text_player = font_message.render(text, False, (0, 0, 0))  # Crete text object.
         screen.blit(text_player, (self.rect.x - (len(text) * 10 // 2), self.rect.y - 50))  # Show text on the screen.
-
 
     def update(self):
         """Player update."""
