@@ -24,17 +24,27 @@ class Level:
 
                 if block_type == 'B':
                     # Add stone block.
-                    block = Block((x, y), block_size)
+                    block = Block((x, y), block_size, 0, 0)
+                    self.sprites_blocks.add(block)
+
+                if block_type == 'S':
+                    # Add another stone block.
+                    block = Block((x, y), block_size, 1, 0)
+                    self.sprites_blocks.add(block)
+
+                if block_type == 'K':
+                    # Add another stone block.
+                    block = Block((x, y), block_size, 0, 1)
                     self.sprites_blocks.add(block)
 
                 if block_type == 'N':
                     # Add mossy stone block1.
-                    block = Block((x, y), block_size, texture='wall_stone_moss1')
+                    block = Block((x, y), block_size, 0, 0, texture='wall_stone_moss1')
                     self.sprites_blocks.add(block)
 
                 if block_type == 'M':
                     # Add mossy stone block2.
-                    block = Block((x, y), block_size, texture='wall_stone_moss2')
+                    block = Block((x, y), block_size, 0, 0, texture='wall_stone_moss2')
                     self.sprites_blocks.add(block)
 
                 if block_type == 'D':
