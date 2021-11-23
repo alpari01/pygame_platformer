@@ -8,7 +8,7 @@ class Block(pygame.sprite.Sprite):
     Block is viewed here as an in-game obstacle.
     Block has two states: player can collide with it or cannot collide with it. (states NOT ADDED YET).
     """
-    def __init__(self, pos, size, texture='wall_stone'):
+    def __init__(self, pos, size, move_x, move_y, texture='wall_stone'):
         super().__init__()
         if texture == 'wall_stone_moss1':
             self.image = pygame.transform.scale(img_block_wall_stones_mossy1, (size, size))
@@ -19,10 +19,20 @@ class Block(pygame.sprite.Sprite):
             self.image = pygame.transform.scale(img_block_wall_stones, (size, size))
 
         self.rect = self.image.get_rect(topleft=pos)
+        self.move_direction = 1
+        self.move_counter = 0
+        self.move_x = move_x
+        self.move_y = move_y
 
     def update(self, x_shift, y_shift):
         self.rect.x += x_shift
         self.rect.y += y_shift
+        self.rect.x += self.move_direction * self.move_x
+        self.rect.y += self.move_direction * self.move_y
+        self.move_counter += 1
+        if abs(self.move_counter) > 50:
+            self.move_direction *= -1
+            self.move_counter *= -1
 
 
 class IterObject(pygame.sprite.Sprite):
@@ -48,3 +58,4 @@ class IterObject(pygame.sprite.Sprite):
     def update(self, x_shift, y_shift):
         self.rect.x += x_shift
         self.rect.y += y_shift
+

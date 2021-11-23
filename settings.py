@@ -9,12 +9,12 @@ level_layout_intro = [
     '   B              B         B                ',
     '   B                     BBBB                ',
     '   B              P        B                 ',
-    '   B    B            B     B                 ',
+    '   B    B            S     B                 ',
     '   B                                     M   ',
-    '   B            B    B                   M   ',
+    '   B            K    B                   M   ',
     '   B                 B                   B   ',
-    '                     B       B NNN       D   ',
-    'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBBBBBBBBB'
+    '                     B       K NNN       D   ',
+    'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBB'
 ]
 # Blocks types: B - stone block, N - stone mossy block1, M - stone mossy block2.
 # Iter objects: D - door.
