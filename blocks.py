@@ -1,6 +1,7 @@
 import pygame
 from settings import *
 
+
 class Block(pygame.sprite.Sprite):
     """
     Block object.
@@ -59,3 +60,14 @@ class IterObject(pygame.sprite.Sprite):
         self.rect.x += x_shift
         self.rect.y += y_shift
 
+
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self, pos, size):
+        """Enemy init."""
+        super().__init__()
+        self.image = pygame.transform.scale(img_enemy, (57, 57))
+        self.rect = self.image.get_rect(topleft=pos)
+
+    def update(self, x_shift, y_shift):
+        self.rect.x += x_shift
+        self.rect.y += y_shift
