@@ -56,6 +56,10 @@ class Level:
                     player = Player((x, y), (block_size, block_size))
                     self.sprites_player.add(player)
 
+                if block_type == 'E':
+                    enemy = Enemy((x, y), block_size)
+                    self.sprites_blocks.add(enemy)
+
     def scroll_x(self):
         """Scroll the level horizontally while player is moving."""
         player = self.sprites_player.sprite
@@ -112,6 +116,10 @@ class Level:
                     player.direction.y = 0  # If player hits something with its head => cancel jumping (avoid sliding while jumping and hitting e.g. ceiling).
 
         player.message(str(player.rect.width))  # TEST, remove later
+
+    def enemy_collision(self):
+        """Handle player and enemy collision."""
+        pass
 
     def run(self):
         """Run (i.e. draw i.e. render) the level."""

@@ -9,11 +9,11 @@ level_layout_intro = [
     '   B              B         B                ',
     '   B                     BBBB                ',
     '   B              P        B                 ',
-    '   B    B            S     B                 ',
-    '   B                                     M   ',
-    '   B            K    B                   M   ',
-    '   B                 B                   B   ',
-    '                     B       K NNN       D   ',
+    '   B    B                  B       S         ',
+    '   B                 E                   M   ',
+    '   B            K   BB                   M   ',
+    '   B                BB                   B   ',
+    '                   BBB       K NNN       D   ',
     'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBB'
 ]
 # Blocks types: B - stone block, N - stone mossy block1, M - stone mossy block2.
@@ -49,6 +49,9 @@ anim_running = [img_player_running_0, img_player_running_1, img_player_running_2
 
 # Player idle images.
 img_player_idle_0 = pygame.image.load(os.path.join(img_folder, 'idle_0.png'))
+
+# Enemy image.
+img_enemy = pygame.image.load(os.path.join(img_folder, 'enemy.png'))
 
 # Background images.
 img_background_menu = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))  # CHANGE LATER
