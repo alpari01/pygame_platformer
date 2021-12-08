@@ -9,7 +9,7 @@ class Block(pygame.sprite.Sprite):
     Block is viewed here as an in-game obstacle.
     Block has two states: player can collide with it or cannot collide with it. (states NOT ADDED YET).
     """
-    def __init__(self, pos, size, move_x, move_y, texture='wall_stone'):
+    def __init__(self, pos, size, move_x, move_y, is_collision_active=True, texture='wall_stone'):
         super().__init__()
         if texture == 'wall_stone_moss1':
             self.image = pygame.transform.scale(img_block_wall_stones_mossy1, (size, size))
@@ -24,6 +24,8 @@ class Block(pygame.sprite.Sprite):
         self.move_counter = 0
         self.move_x = move_x
         self.move_y = move_y
+
+        self.is_collision_active = is_collision_active
 
     def update(self, x_shift, y_shift):
         self.rect.x += x_shift
@@ -42,7 +44,7 @@ class IterObject(pygame.sprite.Sprite):
 
     E.g.: door, torch, vault, chest.
     """
-    def __init__(self, pos, size, texture='door_metal_is_closed'):
+    def __init__(self, pos, size, is_collision_active=True, texture='door_metal_is_closed'):
         super().__init__()
         if texture == 'door_metal_is_closed':
             self.image = pygame.transform.scale(img_door_metal_closed, (size, size))
@@ -50,6 +52,7 @@ class IterObject(pygame.sprite.Sprite):
             self.image = pygame.transform.scale(img_door_metal_opened, (size, size))
 
         self.rect = self.image.get_rect(topleft=pos)
+        self.is_collision_active = is_collision_active
 
     def message(self, text: str):
         """Display message near the object if player has approach it and pressed interaction button 'E'."""

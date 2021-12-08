@@ -2,7 +2,6 @@ import pygame
 from blocks import *
 from settings import *
 from player import Player
-# from particles import ParticleEffect
 
 class Level:
     """Level init."""
@@ -31,32 +30,32 @@ class Level:
 
                 if block_type == 'B':
                     # Add stone block.
-                    block = Block((x, y), block_size, 0, 0)
+                    block = Block((x, y), block_size, 0, 0, is_collision_active=True)
                     self.sprites_blocks.add(block)
 
                 if block_type == 'S':
                     # Add another stone block.
-                    block = Block((x, y), block_size, 1, 0)
+                    block = Block((x, y), block_size, 1, 0, is_collision_active=True)
                     self.sprites_blocks.add(block)
 
                 if block_type == 'K':
                     # Add another stone block.
-                    block = Block((x, y), block_size, 0, 1)
+                    block = Block((x, y), block_size, 0, 1, is_collision_active=True)
                     self.sprites_blocks.add(block)
 
                 if block_type == 'N':
                     # Add mossy stone block1.
-                    block = Block((x, y), block_size, 0, 0, texture='wall_stone_moss1')
+                    block = Block((x, y), block_size, 0, 0, is_collision_active=True, texture='wall_stone_moss1')
                     self.sprites_blocks.add(block)
 
                 if block_type == 'M':
                     # Add mossy stone block2.
-                    block = Block((x, y), block_size, 0, 0, texture='wall_stone_moss2')
+                    block = Block((x, y), block_size, 0, 0, is_collision_active=True, texture='wall_stone_moss2')
                     self.sprites_blocks.add(block)
 
                 if block_type == 'D':
                     # Add door.
-                    door = IterObject((x, y), block_size, texture='door_metal_is_closed')
+                    door = IterObject((x, y), block_size, is_collision_active=True, texture='door_metal_is_closed')
                     self.sprites_blocks.add(door)
 
                 if block_type == 'P':
@@ -93,7 +92,7 @@ class Level:
 
         for block in self.sprites_blocks.sprites():
             # If player collides with any block.
-            if block.rect.colliderect(player.rect):
+            if block.rect.colliderect(player.rect) and block.is_collision_active == True:
                 # If player is moving left and colliding some block => collision happens on the left side of player.
                 if player.direction.x < 0:
                     player.rect.left = block.rect.right
@@ -120,7 +119,7 @@ class Level:
 
         for block in self.sprites_blocks.sprites():
             # If player collides with any block.
-            if block.rect.colliderect(player.rect):
+            if block.rect.colliderect(player.rect) and block.is_collision_active == True:
                 # If player is moving down (falling) and colliding some block => collision happens on the bottom side of player.
                 if player.direction.y > 0:
                     player.rect.bottom = block.rect.top
