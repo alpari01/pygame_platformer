@@ -63,7 +63,7 @@ class Level:
                     self.sprites_player.add(player)
 
                 if block_type == 'E':
-                    enemy = Enemy((x, y), block_size)
+                    enemy = Enemy((x, y), block_size, is_collision_active=True)
                     self.sprites_blocks.add(enemy)
 
     def scroll_x(self):

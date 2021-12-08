@@ -44,7 +44,7 @@ class IterObject(pygame.sprite.Sprite):
 
     E.g.: door, torch, vault, chest.
     """
-    def __init__(self, pos, size, is_collision_active=True, texture='door_metal_is_closed'):
+    def __init__(self, pos, size, is_closed=True, is_collision_active=True, texture='door_metal_is_closed'):
         super().__init__()
         if texture == 'door_metal_is_closed':
             self.image = pygame.transform.scale(img_door_metal_closed, (size, size))
@@ -53,11 +53,7 @@ class IterObject(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(topleft=pos)
         self.is_collision_active = is_collision_active
-
-    def message(self, text: str):
-        """Display message near the object if player has approach it and pressed interaction button 'E'."""
-        text_iter_object = font_message.render(text, False, (0, 0, 0))  # Crete text object.
-        screen.blit(text_iter_object, (self.rect.x - (len(text) * 10 // 2), self.rect.y - 50))  # Show text on the screen.
+        self.is_closed = is_closed
 
     def update(self, x_shift, y_shift):
         self.rect.x += x_shift
@@ -65,11 +61,13 @@ class IterObject(pygame.sprite.Sprite):
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, pos, size):
+    def __init__(self, pos, size, is_collision_active=True):
         """Enemy init."""
         super().__init__()
         self.image = pygame.transform.scale(img_enemy, (57, 57))
         self.rect = self.image.get_rect(topleft=pos)
+
+        self.is_collision_active = is_collision_active
 
     def update(self, x_shift, y_shift):
         self.rect.x += x_shift
