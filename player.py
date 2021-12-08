@@ -49,18 +49,22 @@ class Player(pygame.sprite.Sprite):
             dust_particle = self.dust_run_particles[int(self.dust_frame_index)]
 
             if self.facing_right:
-                pos = self.rect.bottomleft - pygame.math.Vector2(6,10)
+                pos = self.rect.bottomleft - pygame.math.Vector2(6, 10)
                 self.display_surface.blit(dust_particle, pos)
 
             else:
-                pos = pos = self.rect.bottomright - pygame.math.Vector2(6,10)
+                pos = pos = self.rect.bottomright - pygame.math.Vector2(6, 10)
                 flipped_dust_particle = pygame.transform.flip(dust_particle, True, False) # horizontal flip/vertical flip
                 self.display_surface.blit(flipped_dust_particle, pos)
-
 
     def get_input(self):
         """Handle user input from keyboard and animations."""
         keys = pygame.key.get_pressed()  # Get all the keys that are currently pressed.
+
+        # If user presses 'E' => player interact with object.
+        if keys[pygame.K_e]:
+            #self.message("pressed E")
+            return 'interaction_pressed'
 
         # If user presses 'right arrow' => player move right.
         if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:
@@ -130,11 +134,11 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()  # Get all the keys that are currently pressed.
         if keys[pygame.K_SPACE] or keys[pygame.K_UP] and self.on_ground:
             self.direction.y = self.jump_height
-            # self.create_jump_particles(self.rect.midbottom)
+
 
     def message(self, text: str):
         """Handle player messages (aka player's thoughts)."""
-        text_player = font_message.render(text, False, (0, 0, 0))  # Create text object.
+        text_player = font_message.render(text, False, (255, 255, 255))  # Create text object.
         screen.blit(text_player, (self.rect.x - (len(text) * 10 // 2), self.rect.y - 50))  # Show text on the screen.
 
     def update(self):

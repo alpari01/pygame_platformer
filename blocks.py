@@ -44,20 +44,26 @@ class IterObject(pygame.sprite.Sprite):
 
     E.g.: door, torch, vault, chest.
     """
-    def __init__(self, pos, size, is_closed=True, is_collision_active=True, texture='door_metal_is_closed'):
+    def __init__(self, pos, size, is_closed=True, is_collision_active=True, block_type=None, texture='door_metal_is_closed'):
         super().__init__()
+        self.texture = texture
         if texture == 'door_metal_is_closed':
             self.image = pygame.transform.scale(img_door_metal_closed, (size, size))
-        if texture == 'door_metal_is_opened':
-            self.image = pygame.transform.scale(img_door_metal_opened, (size, size))
 
         self.rect = self.image.get_rect(topleft=pos)
         self.is_collision_active = is_collision_active
         self.is_closed = is_closed
+        self.block_type = block_type
+        self.size = size
 
     def update(self, x_shift, y_shift):
         self.rect.x += x_shift
         self.rect.y += y_shift
+
+        if self.texture == 'door_metal_is_opened':
+            self.image = pygame.transform.scale(img_door_metal_opened, (self.size, self.size))
+        if self.texture == 'door_metal_is_closed':
+            self.image = pygame.transform.scale(img_door_metal_closed, (self.size, self.size))
 
 
 class Enemy(pygame.sprite.Sprite):

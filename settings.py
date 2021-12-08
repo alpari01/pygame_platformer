@@ -13,7 +13,7 @@ level_layout_intro = [
     '   B                 E                   M   ',
     '   B            K   BB                   M   ',
     '   B                BB                   B   ',
-    '                   BBB       K NNN       D   ',
+    '                     D       K NNN       D   ',
     'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBB'
 ]
 
@@ -91,6 +91,6 @@ img_door_metal_opened = pygame.image.load(os.path.join(img_folder, 'img_door_met
 
 # Fonts used.
 pygame.font.init()  # Calling font module.
-font_message = pygame.font.SysFont('Comic Sans MS', 30)
+font_message = pygame.font.SysFont('Comic Sans MS', 25)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))  # Set up the main window.

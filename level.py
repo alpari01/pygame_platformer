@@ -55,7 +55,7 @@ class Level:
 
                 if block_type == 'D':
                     # Add door.
-                    door = IterObject((x, y), block_size, is_collision_active=True, texture='door_metal_is_closed')
+                    door = IterObject((x, y), block_size, is_collision_active=True, block_type='door', texture='door_metal_is_closed')
                     self.sprites_blocks.add(door)
 
                 if block_type == 'P':
@@ -92,7 +92,7 @@ class Level:
 
         for block in self.sprites_blocks.sprites():
             # If player collides with any block.
-            if block.rect.colliderect(player.rect) and block.is_collision_active == True:
+            if block.rect.colliderect(player.rect) and block.is_collision_active is True:
                 # If player is moving left and colliding some block => collision happens on the left side of player.
                 if player.direction.x < 0:
                     player.rect.left = block.rect.right
@@ -109,7 +109,6 @@ class Level:
         if player.on_right and (player.rect.right > self.current_x or player.direction.x <= 0):
             player.on_right = False
 
-
     def collision_vertical(self):
         """Handle player and objects collision with vertical movement."""
         player = self.sprites_player.sprite
@@ -119,7 +118,7 @@ class Level:
 
         for block in self.sprites_blocks.sprites():
             # If player collides with any block.
-            if block.rect.colliderect(player.rect) and block.is_collision_active == True:
+            if block.rect.colliderect(player.rect) and block.is_collision_active is True:
                 # If player is moving down (falling) and colliding some block => collision happens on the bottom side of player.
                 if player.direction.y > 0:
                     player.rect.bottom = block.rect.top
@@ -138,7 +137,20 @@ class Level:
         if player.on_ceiling and player.direction.y > 0:
             player.on_ceiling = False
 
-        player.message(str(player.rect.width))  # TEST, remove later
+        #player.message(str(player.rect.width))  # TEST, remove later
+
+    def player_interaction(self):
+        """Handle player interaction with iter objects (e.g. door)."""
+        player = self.sprites_player.sprite
+        for block in self.sprites_blocks.sprites():
+            # Draw player text if player has approached iter block.
+            if isinstance(block, IterObject) and block.block_type == 'door' and abs(block.rect.x - player.rect.x) <= 150 and abs(block.rect.y - player.rect.y) <= 150:
+                player.message(f'{block.is_collision_active}')
+
+                if player.get_input() == 'interaction_pressed':
+                    # Open the door
+                    block.is_collision_active = False
+                    block.texture = 'door_metal_is_opened'
 
     def enemy_collision(self):
         """Handle player and enemy collision."""
@@ -147,7 +159,6 @@ class Level:
     def check_win(self):
         if pygame.sprite.spritecollide(self.sprites_player, self.sprites_blocks(img_door_metal_closed, False)):
             self.setup_level(level_2)
-
 
     def run(self):
         """Run (i.e. draw i.e. render) the level."""
@@ -158,4 +169,5 @@ class Level:
         self.sprites_player.update()
         self.collision_horizontal()
         self.collision_vertical()
+        self.player_interaction()
         self.sprites_player.draw(self.display_surface)
