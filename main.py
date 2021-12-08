@@ -13,10 +13,13 @@ pygame.display.set_caption("My test")  # Set the name of the game window.
 
 clock = pygame.time.Clock()
 
+
+
 # Sprites
 sprites_player = pygame.sprite.Group()  # Create group of sprites.
 sprites_blocks = pygame.sprite.Group()  # Create another group of sprites.
 sprites_enemy = pygame.sprite.Group()
+
 
 
 def draw_background(level: int = 0):
