@@ -2,7 +2,7 @@ import pygame
 from support import import_folder
 import os
 
-
+"""
 class ParticleEffect(pygame.sprite.Sprite):
     def __init__(self, pos, type):
         self.frame_index = 0
@@ -24,4 +24,4 @@ class ParticleEffect(pygame.sprite.Sprite):
 
     def update(self, x_shift):
         self.animate()
-        self.rect.x += x_shift
+        self.rect.x += x_shift """

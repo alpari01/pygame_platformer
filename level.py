@@ -18,8 +18,6 @@ class Level:
         self.dust_sprite = pygame.sprite.GroupSingle()
 
     def create_jump_particles(self, pos):
-        jump_particle_sprite = ParticleEffect(pos, 'jump')
-        # self.dust_sprite.add(jump_particle_sprite)
         pass
 
     def setup_level(self, layout):
@@ -157,10 +155,6 @@ class Level:
         self.sprites_blocks.update(self.world_shift_horizontal, self.world_shift_vertical)
         self.sprites_blocks.draw(self.display_surface)
         self.scroll_x()
-
-        # dust
-        # self.dust_sprite.update((self.world_shift_horizontal, self.world_shift_vertical))
-        # self.dust_sprite.draw(self.display_surface)
 
         self.sprites_player.update()
         self.collision_horizontal()
