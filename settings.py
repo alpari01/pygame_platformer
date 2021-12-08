@@ -2,19 +2,19 @@ import pygame
 import os
 
 level_layout_intro = [
-    '   B                        BBB              ',
-    '   B                        B                ',
-    '   B             B          BB               ',
-    '   B                        B                ',
-    '   B              B         B                ',
-    '   B                     BBBB                ',
-    '   B              P        B                 ',
-    '   B    B                  B       S         ',
-    '   B                 E                   M   ',
-    '   B            K   BB                   M   ',
-    '   B                BB                   B   ',
-    '                     D       K NNN       D   ',
-    'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBB'
+    '   B                        BBB           KKKKK        BBBBBBBBBBBBBBBB       BBB      BBBBBBBBBBBBBBBB                                                                                     ',
+    '   B                        B                                                                                                                                                               ',
+    '   B             B          BB                                                                                                                                                              ',
+    '   B                        B                                                                                                                                                               ',
+    '   B              B         B                                                                                                                                                               ',
+    '   B                     BBBB                                         B              BS                                                                                                     ',
+    '   B    P                  B                            B             B               B                                                                                                     ',
+    '   B    B                  B       S                    B             B               S            BB                                                                                       ',
+    '   B                 E                   M              K             B              S              B             BB                                                                        ',
+    '   B            K   BB                   M              K      K      S              B              S             S                                                                         ',
+    '   B                BB                   B        B     B             S            B   B           BBS            B                                                                         ',
+    '                     D       K NNN       D              B             B           B     B           BB           SSB                                                                      ',
+    'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBBBBBBBBBBBBBMMMMMMBBBMMBBBBBBBBSBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
 ]
 
 level_2 = [
