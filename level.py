@@ -144,8 +144,8 @@ class Level:
         player = self.sprites_player.sprite
         for block in self.sprites_blocks.sprites():
             # Draw player text if player has approached iter block.
-            if isinstance(block, IterObject) and block.block_type == 'door' and abs(block.rect.x - player.rect.x) <= 150 and abs(block.rect.y - player.rect.y) <= 150:
-                player.message(f'{block.is_collision_active}')
+            if isinstance(block, IterObject) and block.block_type == 'door' and abs(block.rect.x - player.rect.x) <= 150 and abs(block.rect.y - player.rect.y) <= 150 and block.is_collision_active is True:
+                player.message(f'Press E to open')
 
                 if player.get_input() == 'interaction_pressed':
                     # Open the door
