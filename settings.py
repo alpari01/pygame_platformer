@@ -10,11 +10,11 @@ level_layout_intro = [
     '   B                     BBBB                                         B              BS                                                                                                     ',
     '   B    P                  B                            B             B               B                                                                                                     ',
     '   B    B                  B       S                    B             B               S            BB                                                                                       ',
-    '   B                 E                   M              K             B              S              B             BB                                                                        ',
-    '   B            K   BB                   M              K      K      S              B              S             S                                                                         ',
+    '   B                 E                   B              K             B              S              B             BB                                                                        ',
+    '   B            K   BB                   B              K      K      S              B              S             S                                                                         ',
     '   B                BB                   B        B     B             S            B   B           BBS            B                                                                         ',
-    '                     D       K NNN       D              B             B           B     B           BB           SSB                                                                      ',
-    'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBBBBBBBBBBBBBMMMMMMBBBMMBBBBBBBBSBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
+    '                     D       K BBB       D              B             B           B     B           BB           SSB                                                                      ',
+    'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBSBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
 ]
 
 level_2 = [
@@ -71,7 +71,7 @@ img_player_idle_0 = pygame.image.load(os.path.join(img_folder, 'idle_0.png'))
 img_enemy = pygame.image.load(os.path.join(img_folder, 'enemy.png'))
 
 # Background images.
-img_background_menu = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))  # CHANGE LATER
+img_background_menu = pygame.image.load(os.path.join(img_folder, 'menu_bg.jpg'))  # CHANGE LATER
 img_background_menu_rect = img_background_menu.get_rect()
 
 img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg.jpg'))  # CHANGE LATER
@@ -91,6 +91,6 @@ img_door_metal_opened = pygame.image.load(os.path.join(img_folder, 'img_door_met
 
 # Fonts used.
 pygame.font.init()  # Calling font module.
-font_message = pygame.font.SysFont('Comic Sans MS', 25)
+font_message = pygame.font.SysFont('8BIT', 25)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))  # Set up the main window.
