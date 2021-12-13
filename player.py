@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 from settings import *
 from support import import_folder
 import os
@@ -132,7 +133,10 @@ class Player(pygame.sprite.Sprite):
         """Handle jumping."""
         # If user presses 'Space' => player jump.
         keys = pygame.key.get_pressed()  # Get all the keys that are currently pressed.
-        if keys[pygame.K_SPACE] or keys[pygame.K_UP] and self.on_ground:
+        if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
+            jumping = pygame.mixer.Sound('jump.wav')
+            jumping.set_volume(0.5)
+            jumping.play()
             self.direction.y = self.jump_height
 
 
