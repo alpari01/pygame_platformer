@@ -19,6 +19,7 @@ pygame.display.set_caption("My test")  # Set the name of the game window.
 clock = pygame.time.Clock()
 
 
+
 # Sprites
 sprites_player = pygame.sprite.Group()  # Create group of sprites.
 sprites_blocks = pygame.sprite.Group()  # Create another group of sprites.
@@ -65,7 +66,7 @@ menu = pygame_menu.Menu('Menu Test', 400, 300, mouse_enabled=True, mouse_motion_
 menu.add.button('Play', menu_close)
 menu.add.button('Quit', pygame_menu.events.EXIT)
 
-# Show the main menu ar start
+# Show the main menu at start
 menu_show()
 
 # Level
