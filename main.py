@@ -1,8 +1,13 @@
 import pygame
 import pygame_menu
+from pygame import mixer
+
+from enemy_quest import EnemyQuest
 from settings import *
 from level import Level
 
+pygame.mixer.pre_init(44100, -16, 2, 512)
+mixer.init()
 pygame.init()  # Initialize game constructor.
 
 
@@ -13,10 +18,20 @@ pygame.display.set_caption("My test")  # Set the name of the game window.
 
 clock = pygame.time.Clock()
 
+
 # Sprites
 sprites_player = pygame.sprite.Group()  # Create group of sprites.
 sprites_blocks = pygame.sprite.Group()  # Create another group of sprites.
 sprites_enemy = pygame.sprite.Group()
+
+# Quests
+enemy_quest = EnemyQuest(WIDTH // 2, HEIGHT // 2, img_quest_background)
+
+# Sounds
+jumping = pygame.mixer.Sound('jump.wav')
+jumping.set_volume(0.5)
+play = pygame.mixer.Sound('play.wav')
+play.set_volume(0.5)
 
 
 def draw_background(level: int = 0):
@@ -34,6 +49,7 @@ def draw_background(level: int = 0):
 
 def menu_close():
     # Close the menu and start the game. Invoke while 'Play' button is pressed.
+    play.play()
     menu.disable()
 
 
