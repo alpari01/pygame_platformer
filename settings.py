@@ -2,6 +2,22 @@ import pygame
 import os
 
 level_layout_intro = [
+    '   B                        BBB           KKKKK        BBBBBBBBBBBBBBBB       BBB      BBBBBBBBBBBBBBBB                                                                                     ',
+    '   B                        B                                                                                                                                                               ',
+    '   B             B          BB                                                                                                                                                              ',
+    '   B                        B                                                                                                                                                               ',
+    '   B              B         B                                                                                                                                                               ',
+    '   B                     BBBB                                         B              BS                                                                                                     ',
+    '   B    P                  B                            B             B               B                                                                                                     ',
+    '   B    B                  B       S                    B             B               S            BB                                                                                       ',
+    '   B                 E                   M              K             B              S              B             BB                                                                        ',
+    '   B            K   BB                   M              K      K      S              B              S             S                                                                         ',
+    '   B                BB                   B        B     B             S            B   B           BBS            B                                                                         ',
+    '                     D       K NNN       D              B             B           B     B           BB           SSB                                                                      ',
+    'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBBBBBBBBBBBBBMMMMMMBBBMMBBBBBBBBSBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
+]
+
+level_2 = [
     '   B                        BBB              ',
     '   B                        B                ',
     '   B             B          BB               ',
@@ -13,9 +29,10 @@ level_layout_intro = [
     '   B                                     M   ',
     '   B            K   BB                   M   ',
     '   B                BB                   B   ',
-    '                   BBB       K NNN       D   ',
+    '                   BBB       K NNN           ',
     'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBB'
 ]
+
 # Blocks types: B - stone block, N - stone mossy block1, M - stone mossy block2.
 # Iter objects: D - door.
 block_size = 48  # Size of a single block.
@@ -61,7 +78,7 @@ img_enemy = pygame.image.load(os.path.join(img_folder, 'enemy.png'))
 img_background_menu = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))  # CHANGE LATER
 img_background_menu_rect = img_background_menu.get_rect()
 
-img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg_test.jpg'))  # CHANGE LATER
+img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg.jpg'))  # CHANGE LATER
 img_background_first_level_rect = img_background_first_level.get_rect()
 
 IMAGE_ADD_SCALE = 28  # Increase player scale of images by this value.
@@ -78,6 +95,6 @@ img_door_metal_opened = pygame.image.load(os.path.join(img_folder, 'img_door_met
 
 # Fonts used.
 pygame.font.init()  # Calling font module.
-font_message = pygame.font.SysFont('Comic Sans MS', 30)
+font_message = pygame.font.SysFont('Comic Sans MS', 25)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))  # Set up the main window.
