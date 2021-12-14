@@ -2,7 +2,6 @@ import pygame
 import pygame_menu
 from pygame import mixer
 
-from enemy_quest import EnemyQuest
 from settings import *
 from level import Level
 
@@ -25,8 +24,6 @@ sprites_player = pygame.sprite.Group()  # Create group of sprites.
 sprites_blocks = pygame.sprite.Group()  # Create another group of sprites.
 sprites_enemy = pygame.sprite.Group()
 
-# Quests
-enemy_quest = EnemyQuest(WIDTH // 2, HEIGHT // 2, img_quest_background)
 
 # Sounds
 jumping = pygame.mixer.Sound('jump.wav')
