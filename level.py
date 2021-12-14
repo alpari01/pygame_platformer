@@ -1,7 +1,11 @@
 import pygame
+import pygame_menu.events
+
 from blocks import *
+import pygame_menu
 from settings import *
 from player import Player
+
 
 class Level:
     """Level init."""
@@ -28,6 +32,11 @@ class Level:
             for column_index, block_type in enumerate(row):
                 x = column_index * block_size
                 y = row_index * block_size
+
+                if block_type == 'L':
+                    # Add lava.
+                    lava = Lava((x, y), block_size, 0, 0, texture='lava')
+                    self.sprites_blocks.add(lava)
 
                 if block_type == 'B':
                     # Add stone block.

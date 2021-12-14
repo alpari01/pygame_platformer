@@ -68,6 +68,24 @@ class IterObject(pygame.sprite.Sprite):
             self.image = pygame.transform.scale(img_door_metal_closed, (self.size, self.size))
 
 
+class Lava(pygame.sprite.Sprite):
+    """Deadly object."""
+    def __init__(self, pos, size, is_collision_active=True, block_type='lava', texture='lava'):
+        super().__init__()
+        self.texture = texture
+        if texture == 'lava':
+            self.image = pygame.transform.scale(lava_img, (size, size))
+
+        self.rect = self.image.get_rect(topleft=pos)
+        self.is_collision_active = is_collision_active
+        self.block_type = block_type
+        self.size = size
+
+    def update(self, x_shift, y_shift):
+        self.rect.x += x_shift
+        self.rect.y += y_shift
+
+
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, pos, size, is_collision_active=True):
         """Enemy init."""
