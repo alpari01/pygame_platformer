@@ -171,3 +171,4 @@ class Level:
         self.collision_vertical()
         self.player_interaction()
         self.sprites_player.draw(self.display_surface)
+

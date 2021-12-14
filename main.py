@@ -17,7 +17,9 @@ pygame.display.set_caption("Project 004")  # Set the name of the game window.
 
 clock = pygame.time.Clock()
 
-
+# Level
+level1 = Level(level_layout_intro, screen)  # Create level object.
+level2 = Level(level_2, screen)
 
 # Sprites
 sprites_player = pygame.sprite.Group()  # Create group of sprites.
@@ -70,28 +72,62 @@ menu.add.button('Quit', pygame_menu.events.EXIT)
 # Show the main menu at start
 menu_show()
 
-# Level
-level = Level(level_layout_intro, screen)  # Create level object.
+def choose_level_close():
+    choose_level.disable()
+    running = True  # True - game is running, False - quit (end) the game.
+    while running:
+        # Handel keyboard actions.
+        for event in pygame.event.get():
+            # Handle pressing "X (close window)" in the window's upper panel.
+            if event.type == pygame.QUIT:
+                # Stop the game => Exit.
+                running = False
+            # Handle 'jumping' action.
 
-# Main loop.
-running = True  # True - game is running, False - quit (end) the game.
-while running:
-    # Handel keyboard actions.
-    for event in pygame.event.get():
-        # Handle pressing "X (close window)" in the window's upper panel.
-        if event.type == pygame.QUIT:
-            # Stop the game => Exit.
-            running = False
-        # Handle 'jumping' action.
+        # Update objects on the screen.
+        draw_background(1)
 
-    # Update objects on the screen.
-    draw_background(1)
+        # DO NOT remove these :)
+        level1.run()
+        clock.tick(FPS)  # Maintain the constant FPS.
+        pygame.display.flip()  # Update screen.
+
+def choose_level_close_2():
+    choose_level.disable()
+    running = True  # True - game is running, False - quit (end) the game.
+    while running:
+        # Handel keyboard actions.
+        for event in pygame.event.get():
+            # Handle pressing "X (close window)" in the window's upper panel.
+            if event.type == pygame.QUIT:
+                # Stop the game => Exit.
+                running = False
+            # Handle 'jumping' action.
+
+        # Update objects on the screen.
+        draw_background(1)
+
+        # DO NOT remove these :)
+        level2.run()
+        clock.tick(FPS)  # Maintain the constant FPS.
+        pygame.display.flip()  # Update screen.
 
 
-    # DO NOT remove these :)
-    level.run()
-    clock.tick(FPS)  # Maintain the constant FPS.
-    pygame.display.flip()  # Update screen.
+def choose_level_show():
+    """Show the main menu at start."""
+    choose_level.mainloop(screen, bgfun=draw_background)
 
+
+font = pygame_menu.font.FONT_8BIT
+theme = pygame_menu.themes.Theme(widget_font=font, title_font=pygame_menu.font.FONT_8BIT,
+                                      title_font_antialias=True, title_background_color=(0, 0, 0, 0),
+                                      title_offset=(116, 50))  # Main menu object.
+theme.background_color = (0, 0, 0, 0)
+choose_level = pygame_menu.Menu('Choose level', 400, 300, mouse_enabled=True, mouse_motion_selection=True, theme=menu_theme)
+
+choose_level.add.button('Level 1', choose_level_close)
+choose_level.add.button('Level 2', choose_level_close_2)
+
+choose_level_show()
 
 pygame.quit()  # Close the game application (constructor).

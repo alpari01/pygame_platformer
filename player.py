@@ -139,7 +139,6 @@ class Player(pygame.sprite.Sprite):
             jumping.play()
             self.direction.y = self.jump_height
 
-
     def message(self, text: str):
         """Handle player messages (aka player's thoughts)."""
         text_player = font_message.render(text, False, (255, 255, 255))  # Create text object.

@@ -10,27 +10,27 @@ level_layout_intro = [
     '   B                     BBBB                                         B              BS                                                                                                     ',
     '   B    P                  B                            B             B               B                                                                                                     ',
     '   B    B                  B       S                    B             B               S            BB                                                                                       ',
-    '   B                 E                   B              K             B              S              B             BB                                                                        ',
+    '   B                                     B              K             B              S              B             BB                                                                        ',
     '   B            K   BB                   B              K      K      S              B              S             S                                                                         ',
     '   B                BB                   B        B     B             S            B   B           BBS            B                                                                         ',
-    '                     D       K BBB       D              B             B           B     B           BB           SSB                                                                      ',
-    'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBSBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
+    '                     D       K BB        D              B             B           B     B           BB            D                                                                         ',
+    'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKBBBBBBBBBBBBSBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
 ]
 
 level_2 = [
-    '   B                        BBB              ',
-    '   B                        B                ',
-    '   B             B          BB               ',
-    '   B                        B                ',
-    '   B              B         B                ',
-    '   B                     BBBB                ',
-    '   B              P        B                 ',
-    '   B    B                  B       S         ',
-    '   B                                     M   ',
-    '   B            K   BB                   M   ',
-    '   B                BB                   B   ',
-    '                   BBB       K NNN           ',
-    'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBB'
+    '   B                        BBB           KKKKK        BBBBBBBBBBBBBBBB       BBB      BBBBBBBBBBBBBBBB                                                                                     ',
+    '   B                        B                                                                                                                                                               ',
+    '   B             B          BB                                                                                                                                                              ',
+    '   B                        B                                                                                                                                                               ',
+    '   B              B         B                                                                                                                                                               ',
+    '   B                     BBBB                                         B              BS                                                                                                     ',
+    '   B                       B                            B             B               B                                                                                                     ',
+    '   B    B                  B       S                    B             B               S            BB                                                                                       ',
+    '   B                                     B              K             B              S              B             BB                                                                        ',
+    '   B            K   BB                   B              K      K      S              B              S             S                                                                         ',
+    '   B                BB                   B        B     B             S            B   B           BBS            B                                                                         ',
+    '           P         D       K BB        D              B             B           B     B           BB           SSB                                                                        ',
+    'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKBBBBBBBBBBBBSBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
 ]
 
 # Blocks types: B - stone block, N - stone mossy block1, M - stone mossy block2.
