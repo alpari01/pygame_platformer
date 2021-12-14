@@ -32,6 +32,8 @@ jumping = pygame.mixer.Sound('jump.wav')
 jumping.set_volume(0.5)
 play = pygame.mixer.Sound('play.wav')
 play.set_volume(0.5)
+button_quest_click = pygame.mixer.Sound('sound_button_password_click.wav')
+button_quest_click.set_volume(0.5)
 
 
 def draw_background(level: int = 0):
