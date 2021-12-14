@@ -21,20 +21,20 @@ level_2 = [
     '   B                        BBB           KKKKK        BBBBBBBBBBBBBBBB       BBB      BBBBBBBBBBBBBBBB                                                                                     ',
     '   B                        B                                                                                                                                                               ',
     '   B             B          BB                                                                                                                                                              ',
-    '   B                        B                                                                                                                                                               ',
+    '   B                        S                                                                                                                                                               ',
     '   B              B         B                                                                                                                                                               ',
-    '   B                     BBBB                                         B              BS                                                                                                     ',
-    '   B                       B                            B             B               B                                                                                                     ',
-    '   B    B                  B       S                    B             B               S            BB                                                                                       ',
-    '   B                                     B              K             B              S              B             BB                                                                        ',
-    '   B            K   BB                   B              K      K      S              B              S             S                                                                         ',
-    '   B                BB                   B        B     B             S            B   B           BBS            B                                                                         ',
-    '           P         D       K BB        D              B             B           B     B           BB           SSB                                                                        ',
-    'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKBBBBBBBBBBBBSBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
+    '   B                     KKKK                                         K              BS                                                                                                     ',
+    '   B                                                    B                             B                                                                                                     ',
+    '   B    B                          S                                  B               S            BB                                                                                       ',
+    '   B                                     B              K         S   B                             B            BBB                                                                        ',
+    '   B            K   BB                                  K      S      S              B              S             S                                                                         ',
+    '   B                BB                   B        BBB   B             S                BB          BBS            S                                                                         ',
+    '           P         D       K BB        B              B             B           B     B            D            D                                                                        ',
+    'BBBBKKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKBBBBBBBBBBBBBBLLLBBBBBSSBBBBBBBBBBBBSBBBLLLLLKBBBBBBBBBBBBBBBBBBBBBLLLBBBBBBBBBBBBBBBBBLLLLLLLLLBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
 ]
 
 # Blocks types: B - stone block, N - stone mossy block1, M - stone mossy block2.
-# Iter objects: D - door.
+# Iter objects: D - door, L - lava.
 block_size = 48  # Size of a single block.
 
 # Game main window's dimensions (in pixels).
@@ -90,6 +90,9 @@ img_block_wall_stones_mossy2 = pygame.image.load(os.path.join(img_folder, 'wall_
 # Doors
 img_door_metal_closed = pygame.image.load(os.path.join(img_folder, 'img_door_metal_closed.png'))
 img_door_metal_opened = pygame.image.load(os.path.join(img_folder, 'img_door_metal_opened.png'))
+
+# Lava
+lava_img = pygame.image.load(os.path.join(img_folder, 'lava.png'))
 
 # Fonts used.
 pygame.font.init()  # Calling font module.
