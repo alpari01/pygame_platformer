@@ -16,6 +16,23 @@ level_layout_intro = [
     '                   BBB       K NNN       D   ',
     'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBB'
 ]
+
+level_2 = [
+    '   B                        BBB              ',
+    '   B                        B                ',
+    '   B             B          BB               ',
+    '   B                        B                ',
+    '   B              B         B                ',
+    '   B                     BBBB                ',
+    '   B              P        B                 ',
+    '   B    B                  B       S         ',
+    '   B                 E                   M   ',
+    '   B            K   BB                   M   ',
+    '   B                BB                   B   ',
+    '                   BBB       K NNN           ',
+    'BBBBBBBBBBBMMMMMMBBBMMBBBBBBBBBBBBBBBKKBBBBBB'
+]
+
 # Blocks types: B - stone block, N - stone mossy block1, M - stone mossy block2.
 # Iter objects: D - door.
 block_size = 48  # Size of a single block.
@@ -61,7 +78,7 @@ img_enemy = pygame.image.load(os.path.join(img_folder, 'enemy.png'))
 img_background_menu = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))  # CHANGE LATER
 img_background_menu_rect = img_background_menu.get_rect()
 
-img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg_test.jpg'))  # CHANGE LATER
+img_background_first_level = pygame.image.load(os.path.join(img_folder, 'first_level_bg.jpg'))  # CHANGE LATER
 img_background_first_level_rect = img_background_first_level.get_rect()
 
 IMAGE_ADD_SCALE = 28  # Increase player scale of images by this value.

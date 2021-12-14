@@ -19,6 +19,7 @@ pygame.display.set_caption("My test")  # Set the name of the game window.
 clock = pygame.time.Clock()
 
 
+
 # Sprites
 sprites_player = pygame.sprite.Group()  # Create group of sprites.
 sprites_blocks = pygame.sprite.Group()  # Create another group of sprites.
@@ -32,6 +33,7 @@ jumping = pygame.mixer.Sound('jump.wav')
 jumping.set_volume(0.5)
 play = pygame.mixer.Sound('play.wav')
 play.set_volume(0.5)
+
 
 
 def draw_background(level: int = 0):
