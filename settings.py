@@ -48,7 +48,7 @@ game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, 'images')  # All textures go here.
 
 # Create quest popup window background.
-img_quest_background = pygame.image.load(os.path.join(img_folder, 'bg_art.jpg'))
+img_quest_background = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))
 
 
 # Player action images.

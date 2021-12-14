@@ -15,6 +15,7 @@ class Button:
 
         if (x < mouse[0] < x + self.width) and (y < mouse[1] < y + self.height):
             pygame.draw.rect(screen, self.active_color, (x, y, self.width, self.height))
+
             if click[0] == 1 and action is not None:
                 action()
 

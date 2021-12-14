@@ -1,12 +1,9 @@
 import pygame.mouse
 import pygame_menu
-from pygame import mixer
 
 from settings import *
 from level import Level
 
-pygame.mixer.pre_init(44100, -16, 2, 512)
-mixer.init()
 pygame.init()  # Initialize game constructor.
 
 
@@ -28,13 +25,10 @@ sprites_enemy = pygame.sprite.Group()
 #enemy_quest = EnemyQuest(WIDTH // 2, HEIGHT // 2, img_quest_background)
 
 # Sounds
-"""
-jumping = pygame.mixer.Sound('jump.wav')
-jumping.set_volume(0.5)
-play = pygame.mixer.Sound('play.wav')
-play.set_volume(0.5)
-"""
-
+#jumping = pygame.mixer.Sound('jump.wav')
+#jumping.set_volume(0.5)
+#play = pygame.mixer.Sound('play.wav')
+#play.set_volume(0.5)
 
 def draw_background(level: int = 0):
     """
