@@ -14,7 +14,7 @@ pygame.init()  # Initialize game constructor.
 FPS = 60  # Game frames per second.
 
 
-pygame.display.set_caption("My test")  # Set the name of the game window.
+pygame.display.set_caption("Project 004")  # Set the name of the game window.
 
 clock = pygame.time.Clock()
 
@@ -60,9 +60,13 @@ def menu_show():
 
 
 # Menu
-menu_theme = pygame_menu.themes.Theme()  # Main menu object.
-menu_theme.background_color = (110, 110, 11)
-menu = pygame_menu.Menu('Menu Test', 400, 300, mouse_enabled=True, mouse_motion_selection=True, theme=menu_theme)
+font = pygame_menu.font.FONT_8BIT
+menu_theme = pygame_menu.themes.Theme(widget_font=font, title_font=pygame_menu.font.FONT_8BIT,
+                                      title_font_antialias=True, title_background_color=(0, 0, 0, 0),
+                                      title_offset=(116, 50))  # Main menu object.
+menu_theme.background_color = (0, 0, 0, 0)
+menu = pygame_menu.Menu('Menu', 400, 300, mouse_enabled=True, mouse_motion_selection=True, theme=menu_theme)
+
 menu.add.button('Play', menu_close)
 menu.add.button('Quit', pygame_menu.events.EXIT)
 
