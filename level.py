@@ -2,6 +2,7 @@ import pygame
 from blocks import *
 from settings import *
 from player import Player
+from button import Button
 
 class Level:
     """Level init."""
@@ -13,6 +14,7 @@ class Level:
         self.world_shift_vertical = 0
         self.current_x = 0
 
+        self.show_password_quest = False
         # dust
         self.dust_sprite = pygame.sprite.GroupSingle()
 
@@ -137,7 +139,26 @@ class Level:
         if player.on_ceiling and player.direction.y > 0:
             player.on_ceiling = False
 
-        #player.message(str(player.rect.width))  # TEST, remove later
+        player.message(str(self.show_password_quest))  # TEST, remove later
+
+    def exit_menu_password(self):
+        self.show_password_quest = False
+
+    def show_menu_password_quest(self):
+        self.show_password_quest = True
+        menu_background = img_quest_background
+        button_exit = Button(300, 70)
+
+        screen.blit(menu_background, (0, 0))  # Render menu
+        button_exit.draw(100, 50, 'Exit', font_size=30)
+
+        click = pygame.mouse.get_pressed()
+
+        if click[1] is True:
+            button_exit.height = 10
+            self.exit_menu_password()
+
+
 
     def player_interaction(self):
         """Handle player interaction with iter objects (e.g. door)."""
@@ -148,6 +169,7 @@ class Level:
                 player.message(f'Press E to open')
 
                 if player.get_input() == 'interaction_pressed':
+                    self.show_menu_password_quest()
                     # Open the door
                     block.is_collision_active = False
                     block.texture = 'door_metal_is_opened'

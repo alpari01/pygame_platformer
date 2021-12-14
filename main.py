@@ -1,8 +1,7 @@
-import pygame
+import pygame.mouse
 import pygame_menu
 from pygame import mixer
 
-from enemy_quest import EnemyQuest
 from settings import *
 from level import Level
 
@@ -26,13 +25,15 @@ sprites_blocks = pygame.sprite.Group()  # Create another group of sprites.
 sprites_enemy = pygame.sprite.Group()
 
 # Quests
-enemy_quest = EnemyQuest(WIDTH // 2, HEIGHT // 2, img_quest_background)
+#enemy_quest = EnemyQuest(WIDTH // 2, HEIGHT // 2, img_quest_background)
 
 # Sounds
+"""
 jumping = pygame.mixer.Sound('jump.wav')
 jumping.set_volume(0.5)
 play = pygame.mixer.Sound('play.wav')
 play.set_volume(0.5)
+"""
 
 
 def draw_background(level: int = 0):
@@ -50,7 +51,7 @@ def draw_background(level: int = 0):
 
 def menu_close():
     # Close the menu and start the game. Invoke while 'Play' button is pressed.
-    play.play()
+    #play.play()
     menu.disable()
 
 
@@ -76,6 +77,7 @@ menu_show()
 # Level
 level = Level(level_layout_intro, screen)  # Create level object.
 
+
 # Main loop.
 running = True  # True - game is running, False - quit (end) the game.
 while running:
@@ -85,16 +87,18 @@ while running:
         if event.type == pygame.QUIT:
             # Stop the game => Exit.
             running = False
-        # Handle 'jumping' action.
 
-    # Update objects on the screen.
-    draw_background(1)
-
+    if level.show_password_quest is True:
+        level.show_menu_password_quest()
+        clock.tick(FPS)
+        pygame.display.update()
 
     # DO NOT remove these :)
-    level.run()
-    clock.tick(FPS)  # Maintain the constant FPS.
-    pygame.display.flip()  # Update screen.
+    if not level.show_password_quest:
+        draw_background(1)
+        level.run()
+        clock.tick(FPS)  # Maintain the constant FPS.
+        pygame.display.flip()  # Update screen.
 
 
 pygame.quit()  # Close the game application (constructor).
