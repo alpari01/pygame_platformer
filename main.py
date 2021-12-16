@@ -4,7 +4,6 @@ from pygame import mixer
 
 import player
 from blocks import Lava
-from player import Player
 from settings import *
 from level import Level
 
@@ -95,6 +94,13 @@ def choose_level_close():
         level1.run()
         clock.tick(FPS)  # Maintain the constant FPS.
         pygame.display.flip()  # Update screen.
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_n:
+                    draw_background(1)
+                    level1.setup_level(level_2)
+                    clock.tick(FPS)
+                    pygame.display.flip()
 
 
 def choose_level_close_2():
@@ -116,6 +122,13 @@ def choose_level_close_2():
         level2.run()
         clock.tick(FPS)  # Maintain the constant FPS.
         pygame.display.flip()  # Update screen.
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_n:
+                    draw_background(1)
+                    level2.setup_level(level_end)
+                    clock.tick(FPS)
+                    pygame.display.flip()
 
 
 def choose_level_show():

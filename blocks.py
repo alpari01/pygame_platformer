@@ -43,7 +43,7 @@ class Block(pygame.sprite.Sprite):
 
 class Ai(pygame.sprite.Sprite):
     """
-    Interactable object - object, that player can interact with.
+    Interactable object - object, that player can interact with, ai.
 
     E.g.: door, torch, vault, chest.
     """
@@ -67,6 +67,27 @@ class Ai(pygame.sprite.Sprite):
             self.image = pygame.transform.scale(img_door_metal_opened, (self.size, self.size))
         if self.texture == 'door_metal_is_closed':
             self.image = pygame.transform.scale(img_door_metal_closed, (self.size, self.size))
+
+
+class IterObject(pygame.sprite.Sprite):
+    """
+    Interactable object - object, that player can interact with.
+
+    E.g.: door, torch, vault, chest.
+    """
+    def __init__(self, pos, size, is_collision_active=True, block_type=None, texture='wall_stone'):
+        super().__init__()
+        self.texture = texture
+        self.image = pygame.transform.scale(img_block_wall_stones, (size, size))
+
+        self.rect = self.image.get_rect(topleft=pos)
+        self.is_collision_active = is_collision_active
+        self.block_type = block_type
+        self.size = size
+
+    def update(self, x_shift, y_shift):
+        self.rect.x += x_shift
+        self.rect.y += y_shift
 
 
 class Lava(pygame.sprite.Sprite):

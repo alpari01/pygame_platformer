@@ -38,6 +38,16 @@ class Level:
                     block = Block((x, y), block_size, 0, 0, is_collision_active=True)
                     self.sprites_blocks.add(block)
 
+                if block_type == 'O':
+                    # Add stone block.
+                    over = Block((x, y), block_size, 0, 0, is_collision_active=True, block_type='over')
+                    self.sprites_blocks.add(over)
+
+                if block_type == 'V':
+                    # Add stone block.
+                    press_n = IterObject((x, y), block_size, is_collision_active=True, block_type='press_n')
+                    self.sprites_blocks.add(press_n)
+
                 if block_type == 'S':
                     # Add another stone block.
                     block = Block((x, y), block_size, 1, 0, is_collision_active=True)
@@ -172,18 +182,22 @@ class Level:
     def player_interaction(self):
         """Handle player interaction with iter objects (e.g. door)."""
         player = self.sprites_player.sprite
-        game_over = 0
         for block in self.sprites_blocks.sprites():
             # Draw player text if player has approached iter block.
             if isinstance(block, Ai) and block.block_type == 'ai_door' and abs(block.rect.x - player.rect.x) <= 150 and abs(block.rect.y - player.rect.y) <= 150 and block.is_collision_active is True:
                     # Open the door
-                    player.message(f'Open!')
                     block.is_collision_active = False
                     block.texture = 'door_metal_is_opened'
             elif isinstance(block, Ai) and block.block_type == 'ai_door' and abs(block.rect.x - player.rect.x) > 150 and abs(block.rect.y - player.rect.y) > 150 and block.is_collision_active is False:
                     # Close the door
                     block.is_collision_active = True
                     block.texture = 'door_metal_is_closed'
+            elif isinstance(block, Block) and block.block_type == 'over' and abs(block.rect.top == player.rect.bottom) and block.is_collision_active is True:
+                    # Show game over message
+                    player.message(f'Game over!')
+            elif isinstance(block, IterObject) and block.block_type == 'press_n' and abs(block.rect.x - player.rect.bottom) <= 50 and block.is_collision_active is True:
+                    # Show next level message
+                    player.message(f'You did it! Now press n key to get to the next level.')
 
     def enemy_collision(self):
         """Handle player and enemy collision."""
