@@ -47,7 +47,7 @@ game_folder = os.path.dirname(__file__)
 
 img_folder = os.path.join(game_folder, 'images')  # All textures go here.
 
-
+img_quest_background = pygame.image.load(os.path.join(img_folder, 'bg_test.jpg'))
 
 # Player action images.
 img_player_running_0 = pygame.image.load(os.path.join(img_folder, 'running_0.png'))
