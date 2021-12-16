@@ -14,7 +14,7 @@ level_layout_intro = [
     '   B            K   BB                   B              K      K      S              B              S             S                                                                         ',
     '   B                BB                   B        B     B             S            B   B           BBS            B                                                                         ',
     '                     D       K BB        D              B             B           B     B           BB            D                                                                         ',
-    'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKBBBBBBBBBBBBSBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
+    'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKBBBBBBBBBBBBSBBBBBBKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBVVVVVVVBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
 ]
 
 level_2 = [
@@ -30,7 +30,23 @@ level_2 = [
     '   B            K   BB                                  K      S      S              B              S             S                                                                         ',
     '   B                BB                   B        BBB   B             S                BB          BBS            S                                                                         ',
     '           P         D       K BB        B              B             B           B     B            D            D                                                                        ',
-    'BBBBKKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKBBBBBBBBBBBBBBLLLBBBBBSSBBBBBBBBBBBBSBBBLLLLLKBBBBBBBBBBBBBBBBBBBBBLLLBBBBBBBBBBBBBBBBBLLLLLLLLLBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
+    'BBBBKKKBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKBBBBBBBBBBBBBBLLLBBBBBSSBBBBBBBBBBBBSBBBLLLLLKBBBBBBBBBBBBBBBBBBBBBLLLBBBBBBBVVVVVVVVVBLLLLLLLLLBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
+]
+
+level_end = [
+    '                                                                              BBB      BBBBBBBBBBBBBBBB                                                                                     ',
+    '                                                                                                                                                                                            ',
+    '                                                                                                                                                                                            ',
+    '                                                                                                                                                                                            ',
+    '                                                                                                                                                                                            ',
+    '                                                                                                                                                                                           ',
+    '                                                                                                                                                                                            ',
+    '                                                                                                   BB                                                                                       ',
+    '                                                                                                    B            BBB                                                                        ',
+    '                                                                                                    S             S                                                                         ',
+    '                                                                                                   BBS            S                                                                         ',
+    '           P                                                                                         D            D                                                                        ',
+    'BBBBBBBBBBBOBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBLLLBBBBBSSBBBBBBBBBBBBSBBBLLLLLKBBBBBBBBBBBBBBBBBBBBBLLLBBBBBBBBBBBBBBBBBLLLLLLLLLBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
 ]
 
 # Blocks types: B - stone block, N - stone mossy block1, M - stone mossy block2.
