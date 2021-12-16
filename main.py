@@ -126,9 +126,9 @@ def choose_level_show():
 font = pygame_menu.font.FONT_8BIT
 theme = pygame_menu.themes.Theme(widget_font=font, title_font=pygame_menu.font.FONT_8BIT,
                                       title_font_antialias=True, title_background_color=(0, 0, 0, 0),
-                                      title_offset=(116, 50))  # Main menu object.
+                                      title_offset=(0, 50))  # Main menu object.
 theme.background_color = (0, 0, 0, 0)
-choose_level = pygame_menu.Menu('Choose level', 400, 300, mouse_enabled=True, mouse_motion_selection=True, theme=menu_theme)
+choose_level = pygame_menu.Menu('Choose level', 400, 300, mouse_enabled=True, mouse_motion_selection=True, theme=theme)
 
 choose_level.add.button('Level 1', choose_level_close)
 choose_level.add.button('Level 2', choose_level_close_2)
