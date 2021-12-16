@@ -99,6 +99,7 @@ def choose_level_close():
                 if event.key == pygame.K_n:
                     draw_background(1)
                     level1.setup_level(level_2)
+                    choose_level_close_2()
                     clock.tick(FPS)
                     pygame.display.flip()
 
