@@ -2,6 +2,9 @@ import pygame
 import pygame_menu
 from pygame import mixer
 
+import player
+from blocks import Lava
+from player import Player
 from settings import *
 from level import Level
 
@@ -25,7 +28,7 @@ level2 = Level(level_2, screen)
 sprites_player = pygame.sprite.Group()  # Create group of sprites.
 sprites_blocks = pygame.sprite.Group()  # Create another group of sprites.
 sprites_enemy = pygame.sprite.Group()
-
+sprites_ai = pygame.sprite.Group()
 
 # Sounds
 jumping = pygame.mixer.Sound('jump.wav')
@@ -72,6 +75,7 @@ menu.add.button('Quit', pygame_menu.events.EXIT)
 # Show the main menu at start
 menu_show()
 
+
 def choose_level_close():
     choose_level.disable()
     running = True  # True - game is running, False - quit (end) the game.
@@ -92,11 +96,12 @@ def choose_level_close():
         clock.tick(FPS)  # Maintain the constant FPS.
         pygame.display.flip()  # Update screen.
 
+
 def choose_level_close_2():
     choose_level.disable()
     running = True  # True - game is running, False - quit (end) the game.
     while running:
-        # Handel keyboard actions.
+        # Handle keyboard actions.
         for event in pygame.event.get():
             # Handle pressing "X (close window)" in the window's upper panel.
             if event.type == pygame.QUIT:

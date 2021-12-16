@@ -33,11 +33,6 @@ class Level:
                 x = column_index * block_size
                 y = row_index * block_size
 
-                if block_type == 'L':
-                    # Add lava.
-                    lava = Lava((x, y), block_size, 0, 0, texture='lava')
-                    self.sprites_blocks.add(lava)
-
                 if block_type == 'B':
                     # Add stone block.
                     block = Block((x, y), block_size, 0, 0, is_collision_active=True)
@@ -65,8 +60,13 @@ class Level:
 
                 if block_type == 'D':
                     # Add door.
-                    door = IterObject((x, y), block_size, is_collision_active=True, block_type='door', texture='door_metal_is_closed')
-                    self.sprites_blocks.add(door)
+                    ai_door = Ai((x, y), block_size, is_collision_active=True, block_type='ai_door', texture='door_metal_is_closed')
+                    self.sprites_blocks.add(ai_door)
+
+                if block_type == 'L':
+                    # Add lava.
+                    lava = Lava((x, y), block_size, is_collision_active=True, block_type='lava', texture='lava')
+                    self.sprites_blocks.add(lava)
 
                 if block_type == 'P':
                     player = Player((x, y), (block_size, block_size), self.display_surface, self.create_jump_particles)
@@ -172,16 +172,18 @@ class Level:
     def player_interaction(self):
         """Handle player interaction with iter objects (e.g. door)."""
         player = self.sprites_player.sprite
+        game_over = 0
         for block in self.sprites_blocks.sprites():
             # Draw player text if player has approached iter block.
-            if isinstance(block, IterObject) and block.block_type == 'door' and abs(block.rect.x - player.rect.x) <= 150 and abs(block.rect.y - player.rect.y) <= 150 and block.is_collision_active is True:
-                player.message(f'Press E to open')
-
-                if player.get_input() == 'interaction_pressed':
-                    self.show_menu_password_quest()
+            if isinstance(block, Ai) and block.block_type == 'ai_door' and abs(block.rect.x - player.rect.x) <= 150 and abs(block.rect.y - player.rect.y) <= 150 and block.is_collision_active is True:
                     # Open the door
+                    player.message(f'Open!')
                     block.is_collision_active = False
                     block.texture = 'door_metal_is_opened'
+            elif isinstance(block, Ai) and block.block_type == 'ai_door' and abs(block.rect.x - player.rect.x) > 150 and abs(block.rect.y - player.rect.y) > 150 and block.is_collision_active is False:
+                    # Close the door
+                    block.is_collision_active = True
+                    block.texture = 'door_metal_is_closed'
 
     def enemy_collision(self):
         """Handle player and enemy collision."""
