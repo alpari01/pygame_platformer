@@ -68,6 +68,7 @@ anim_running = [img_player_running_0, img_player_running_1, img_player_running_2
 
 # Player idle images.
 img_player_idle_0 = pygame.image.load(os.path.join(img_folder, 'idle_0.png'))
+rotated_ai = pygame.image.load(os.path.join(img_folder, 'rotated.png'))
 
 # Enemy image.
 img_enemy = pygame.image.load(os.path.join(img_folder, 'enemy.png'))
