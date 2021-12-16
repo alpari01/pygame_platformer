@@ -156,6 +156,7 @@ class Level:
             # Draw player text if player has approached iter block.
             if isinstance(block, Ai) and block.block_type == 'ai_door' and abs(block.rect.x - player.rect.x) <= 150 and abs(block.rect.y - player.rect.y) <= 150 and block.is_collision_active is True:
                     # Open the door
+                    player.message(f'Open!')
                     block.is_collision_active = False
                     block.texture = 'door_metal_is_opened'
             elif isinstance(block, Ai) and block.block_type == 'ai_door' and abs(block.rect.x - player.rect.x) > 150 and abs(block.rect.y - player.rect.y) > 150 and block.is_collision_active is False:
